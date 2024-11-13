@@ -1,0 +1,41 @@
+.root {
+    -clr-back: #41463D;
+    -clr-mid: #424b54;
+    -clr-mid-shadow: rgba(66, 75, 84, 0.75);
+    -clr-front: #399E5A;
+    -clr-accent: #63E2C6;
+    -clr-accent-shadow: rgba(99, 226, 198, 0.5);
+    -clr-active-accent: #A8C686;
+
+    -fx-background-color: -clr-back;
+}
+
+.button {
+    -fx-font-size: 18;
+    -fx-text-fill: white;
+    -fx-background-color: -clr-front;
+    -fx-background-radius: 8;
+    -fx-border-color: -clr-accent;
+    -fx-border-width: 2;
+    -fx-border-radius: 8;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 2);
+}
+
+.button:hover {
+    -fx-border-color: -clr-active-accent;
+}
+
+.button:pressed {
+    -fx-cursor: closed-hand;
+    -fx-translate-y: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 8, 0, 0, 1);
+}
+
+.title {
+    -fx-fill: -clr-front;
+    -fx-font-weight: bold;
+    -fx-font-size: 48;
+    -fx-stroke: -clr-accent;
+    -fx-stroke-width: 0.5;
+}
