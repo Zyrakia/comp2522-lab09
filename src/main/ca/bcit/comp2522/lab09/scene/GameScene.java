@@ -31,7 +31,7 @@ public final class GameScene extends VBox implements Destroyable {
 
     private static final Path QUESTIONS_FILE = Path.of("quiz.txt");
     private static final int QUESTIONS_PER_GAME = 10;
-    private static final long MILLIS_PER_QUESTION = TimeUnit.SECONDS.toMillis(1000);
+    private static final long MILLIS_PER_QUESTION = TimeUnit.SECONDS.toMillis(10);
 
     private static final double ELEMENT_SPACING = 25.0;
 
@@ -61,7 +61,7 @@ public final class GameScene extends VBox implements Destroyable {
         this.quiz = Quiz.fromQuestionsFile(GameScene.QUESTIONS_FILE, GameScene.QUESTIONS_PER_GAME, true);
 
         this.questionTimer = new TimerService(GameScene.MILLIS_PER_QUESTION, this::setMillisRemaining);
-        this.questionTimer.setOnSucceeded((_) -> this.nextQuestion());
+        this.questionTimer.setOnSucceeded((_) -> this.lockInAnswer());
 
         this.questionText = this.createQuestionText();
         this.timerText = this.createTimerText();
@@ -268,6 +268,10 @@ public final class GameScene extends VBox implements Destroyable {
 
         this.quiz.answerQuestion(this.currentQuestion, answer);
         this.updateRunningScore();
+    }
+
+    private void lockInAnswer() {
+        this.answerInput.setDisable(true);
     }
 
     /**
