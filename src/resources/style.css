@@ -1,5 +1,5 @@
 .root {
-    -clr-back: #41463D;
+    -clr-back: #2a2c2a;
     -clr-mid: #424b54;
     -clr-mid-shadow: rgba(66, 75, 84, 0.75);
     -clr-front: #399E5A;
@@ -11,13 +11,16 @@
 }
 
 .button {
-    -fx-font-size: 18;
+    -fx-font-size: 16;
+    -fx-padding: 5 10 5 10;
+
     -fx-text-fill: white;
     -fx-background-color: -clr-front;
     -fx-background-radius: 8;
     -fx-border-color: -clr-accent;
     -fx-border-width: 2;
     -fx-border-radius: 8;
+
     -fx-cursor: hand;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 2);
 }
@@ -36,6 +39,45 @@
     -fx-fill: -clr-front;
     -fx-font-weight: bold;
     -fx-font-size: 48;
+    -fx-effect: dropshadow(gaussian, -clr-accent-shadow, 10, 0.005, 2, 2);
     -fx-stroke: -clr-accent;
-    -fx-stroke-width: 0.5;
+    -fx-stroke-width: 2;
+}
+
+.question-text {
+    -fx-text-fill: white;
+    -fx-text-alignment: center;
+    -fx-wrap-text: true;
+    -fx-font-size: 24;
+
+    -fx-padding: 10 20 10 20;
+    -fx-background-color: -clr-front;
+    -fx-background-radius: 5;
+}
+
+.timer-text {
+    -fx-text-fill: white;
+    -fx-font-size: 16;
+}
+
+.answer-area {
+    -fx-spacing: 15;
+}
+
+.answer-input {
+    -fx-min-height: 30;
+    -fx-padding: 10;
+
+    -fx-text-fill: white;
+    -fx-font-size: 16;
+
+    -fx-background-color: -clr-mid;
+    -fx-border-color: -clr-accent;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.answer-input:focused {
+    -fx-border-color: -clr-active-accent;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 8, 0, 1, 1);
 }
