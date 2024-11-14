@@ -86,7 +86,7 @@ public final class QuizApp extends Application {
 
     /**
      * Reapplies the global stylesheet to the currently viewed scene on the primary stage. This will also add an
-     * empty stylesheet to cache-bust the scene styles, which means the new stylesheet will be applied instantly..
+     * empty stylesheet to cache-bust the scene styles, which means the new stylesheet will be applied instantly.
      */
     private static void applyStyles() {
         final Scene currentScene;
@@ -154,7 +154,7 @@ public final class QuizApp extends Application {
         currentScene = QuizApp.primaryStage.getScene();
         newScene = new Scene(root, QuizApp.SCENE_WIDTH, QuizApp.SCENE_HEIGHT);
 
-        if (currentScene.getRoot() instanceof Destroyable destroyable) {
+        if (currentScene != null && currentScene.getRoot() instanceof Destroyable destroyable) {
             destroyable.destroy();
         }
 
