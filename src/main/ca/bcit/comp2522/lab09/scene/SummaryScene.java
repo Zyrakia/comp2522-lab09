@@ -25,11 +25,6 @@ public final class SummaryScene extends HBox {
     private final Quiz playedQuiz;
     private final Runnable onExit;
 
-    private final Label gradeText;
-    private final Label questionCountText;
-    private final TextArea missedQuestionsText;
-    private final Button exitButton;
-
     /**
      * Creates a new summary screen that displays information for the specified quiz.
      *
@@ -42,10 +37,15 @@ public final class SummaryScene extends HBox {
         this.playedQuiz = playedQuiz;
         this.onExit = onExit;
 
-        this.gradeText = this.createGradeText();
-        this.questionCountText = this.createQuestionCountText();
-        this.missedQuestionsText = this.createMissedQuestionsText();
-        this.exitButton = this.createExitButton();
+        final Label gradeText;
+        final Label questionCountText;
+        final TextArea missedQuestionsText;
+        final Button exitButton;
+
+        gradeText = this.createGradeText();
+        questionCountText = this.createQuestionCountText();
+        missedQuestionsText = this.createMissedQuestionsText();
+        exitButton = this.createExitButton();
 
         final VBox summaryBox;
         summaryBox = new VBox();
@@ -53,9 +53,9 @@ public final class SummaryScene extends HBox {
         summaryBox.setSpacing(SummaryScene.ELEMENT_SPACING);
         summaryBox.setAlignment(Pos.CENTER);
 
-        summaryBox.getChildren().add(this.gradeText);
-        summaryBox.getChildren().add(this.questionCountText);
-        summaryBox.getChildren().add(this.exitButton);
+        summaryBox.getChildren().add(gradeText);
+        summaryBox.getChildren().add(questionCountText);
+        summaryBox.getChildren().add(exitButton);
 
         this.setAlignment(Pos.CENTER);
         this.setSpacing(SummaryScene.ELEMENT_SPACING);
@@ -63,7 +63,7 @@ public final class SummaryScene extends HBox {
         HBox.setHgrow(summaryBox, Priority.ALWAYS);
 
         this.getChildren().add(summaryBox);
-        this.getChildren().add(this.missedQuestionsText);
+        this.getChildren().add(missedQuestionsText);
     }
 
     /**
