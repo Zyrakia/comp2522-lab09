@@ -29,7 +29,7 @@ What do you call an animal that eats only plants?|Herbivore
 Who wrote 'Romeo and Juliet'?|William Shakespeare|Shakespeare
 What country is famous for the Eiffel Tower?|France
 What is the largest continent?|Asia
-What is the name of the closest star to Earth?|Sun
+What is the name of the closest star to Earth?|Sun|The Sun
 How many rings are there in the Olympic logo?|Five|5
 What color are emeralds?|Green
 What is the name of the fairy in 'Peter Pan'?|Tinkerbell

@@ -249,6 +249,7 @@ public final class GameScene extends VBox implements Destroyable {
             this.questionText.setText(this.currentQuestion.getQuestionText());
 
             this.toggleInputs(true);
+            this.answerInput.requestFocus();
             this.startTimer();
         }
     }
