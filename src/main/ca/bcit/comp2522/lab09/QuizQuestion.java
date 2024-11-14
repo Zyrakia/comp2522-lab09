@@ -9,7 +9,7 @@ import java.util.List;
  * @author Ole Lammers & Tianyou Xie
  * @version 1.0
  */
-public class QuizQuestion {
+public final class QuizQuestion {
 
     private static final String ENCODED_ANSWER_SEP = "|";
     private static final String ENCODED_ANSWER_SEP_REGEX = "\\" + ENCODED_ANSWER_SEP;
@@ -105,7 +105,7 @@ public class QuizQuestion {
      * @param givenAnswer the answer to check
      * @return whether the given answer matches at least one accepted answer
      */
-    public final boolean isAcceptedAnswer(final String givenAnswer) {
+    public boolean isAcceptedAnswer(final String givenAnswer) {
         final String normalizedGivenAnswer;
         normalizedGivenAnswer = givenAnswer.toLowerCase().trim();
 
@@ -126,7 +126,7 @@ public class QuizQuestion {
      *
      * @return an encoded string representation of this quiz question
      */
-    public final String encode() {
+    public String encode() {
         return this.question + QuizQuestion.ENCODED_ANSWER_SEP +
                 String.join(QuizQuestion.ENCODED_ANSWER_SEP, this.answers);
     }
@@ -136,8 +136,17 @@ public class QuizQuestion {
      *
      * @return the question text
      */
-    public final String getQuestionText() {
+    public String getQuestionText() {
         return this.question;
+    }
+
+    /**
+     * Returns the first, usually the best, answer for this quiz question.
+     *
+     * @return the "best" answer
+     */
+    public String getBestAnswer() {
+        return this.answers.getFirst();
     }
 
 }

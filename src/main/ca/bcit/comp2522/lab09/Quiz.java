@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 /**
@@ -18,10 +19,11 @@ import java.util.stream.Collectors;
  * @author Ole Lammers & Tianyou Xie
  * @version 1.0
  */
-public class Quiz {
+public final class Quiz {
 
     private final Set<QuizQuestion> questions;
-    private final Map<QuizQuestion, Boolean> answeredQuestions;
+    private final Map<QuizQuestion, String> questionAnswers;
+    private final Map<QuizQuestion, Boolean> questionAnswerResults;
 
     private Iterator<QuizQuestion> questionIterator;
 
@@ -34,7 +36,8 @@ public class Quiz {
         Quiz.validateQuestions(questions);
 
         this.questions = questions;
-        this.answeredQuestions = new HashMap<>();
+        this.questionAnswers = new HashMap<>();
+        this.questionAnswerResults = new HashMap<>();
         this.questionIterator = questions.iterator();
     }
 
@@ -54,7 +57,6 @@ public class Quiz {
         final Set<QuizQuestion> questions;
 
         encodedQuestions = Files.readAllLines(file);
-
         if (shuffle) Collections.shuffle(encodedQuestions);
 
         questions = encodedQuestions.stream().limit(maxQuestions).map(QuizQuestion::decode).collect(Collectors.toSet());
@@ -90,9 +92,9 @@ public class Quiz {
     /**
      * Clears any answers and moves back to the first question of this quiz.
      */
-    public final void reset() {
+    public void reset() {
         this.questionIterator = this.questions.iterator();
-        this.answeredQuestions.clear();
+        this.questionAnswerResults.clear();
     }
 
     /**
@@ -102,7 +104,7 @@ public class Quiz {
      * @param answer   the answer for the question
      * @return whether the answer is accepted (whether it was right)
      */
-    public final boolean answerQuestion(final QuizQuestion question, final String answer) {
+    public boolean answerQuestion(final QuizQuestion question, final String answer) {
         if (!this.questions.contains(question)) {
             throw new IllegalArgumentException("The question \"" + question.getQuestionText() +
                                                        "\" is not on this quiz, so it cannot be answered.");
@@ -111,17 +113,10 @@ public class Quiz {
         final boolean result;
         result = question.isAcceptedAnswer(answer);
 
-        this.answeredQuestions.put(question, result);
-        return result;
-    }
+        this.questionAnswers.put(question, answer);
+        this.questionAnswerResults.put(question, result);
 
-    /**
-     * Determines the amount of questions that have been answered.
-     *
-     * @return the amount of questions on this quiz that were answered
-     */
-    public final int getAnsweredCount() {
-        return this.answeredQuestions.size();
+        return result;
     }
 
     /**
@@ -129,7 +124,7 @@ public class Quiz {
      *
      * @return the amount of questions on this quiz
      */
-    public final int getQuestionCount() {
+    public int getQuestionCount() {
         return this.questions.size();
     }
 
@@ -138,8 +133,47 @@ public class Quiz {
      *
      * @return the amount of questions on this quiz that were correctly answered
      */
-    public final int getCorrectAnsweredCount() {
-        return (int) this.answeredQuestions.entrySet().stream().filter(Map.Entry::getValue).count();
+    public int getCorrectAnsweredCount() {
+        return (int) this.questionAnswerResults.entrySet().stream().filter(Map.Entry::getValue).count();
+    }
+
+    /**
+     * Applies the specified consumer for each question in the quiz.
+     *
+     * @param consumer the consumer to apply
+     */
+    public void forEachQuestion(final Consumer<QuizQuestion> consumer) {
+        this.questions.forEach(consumer);
+    }
+
+    /**
+     * Retrieves the recorded answer for the specified question.
+     *
+     * @param question the question to get the result for
+     * @return the recorded answer, or null if there is no answer yet
+     */
+    public String getRecordedAnswerFor(final QuizQuestion question) {
+        if (!this.questions.contains(question)) {
+            throw new IllegalArgumentException("The question \"" + question.getQuestionText() +
+                                                       "\" is not on this quiz, so it cannot have an answer.");
+        }
+
+        return this.questionAnswers.get(question);
+    }
+
+    /**
+     * Retrieves the recorded result for the specified question.
+     *
+     * @param question the question to get the result for
+     * @return the recorded answer, or false if there was no answer at all
+     */
+    public boolean getRecordedResultFor(final QuizQuestion question) {
+        if (!this.questions.contains(question)) {
+            throw new IllegalArgumentException("The question \"" + question.getQuestionText() +
+                                                       "\" is not on this quiz, so it cannot have an answer.");
+        }
+
+        return this.questionAnswerResults.getOrDefault(question, false);
     }
 
 }

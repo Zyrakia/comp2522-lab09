@@ -217,6 +217,7 @@ public final class GameScene extends VBox implements Destroyable {
         this.answerInput.clear();
 
         this.quiz.answerQuestion(this.currentQuestion, answer);
+        // TODO implement and update a score
     }
 
     /**

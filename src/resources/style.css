@@ -81,3 +81,19 @@
     -fx-border-color: -clr-active-accent;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 8, 0, 1, 1);
 }
+
+.grade-text {
+    -fx-text-fill: white;
+    -fx-font-size: 28;
+    -fx-padding: 0 0 25 0;
+    -fx-border-color: -clr-accent;
+    -fx-border-style: dashed;
+    -fx-border-width: 0 0 2 0;
+}
+
+.question-count-text {
+    -fx-text-fill: white;
+    -fx-wrap-text: true;
+    -fx-text-alignment: center;
+    -fx-font-size: 16;
+}
