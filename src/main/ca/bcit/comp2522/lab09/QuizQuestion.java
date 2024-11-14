@@ -28,11 +28,15 @@ public final class QuizQuestion {
         QuizQuestion.validateAnswers(answers);
 
         this.question = question;
-        this.answers = answers.stream().map(String::toLowerCase).toList();
+        this.answers = answers;
     }
 
     /**
      * Decodes a quiz question from its encoded format.
+     * <p>
+     * Then encoded format is the question text followed by answers, each separated by the
+     * {@link QuizQuestion#ENCODED_ANSWER_SEP}. The first answer is always required, and it must be separated from
+     * the question text by the {@link QuizQuestion#ENCODED_ANSWER_SEP}.
      *
      * @param encodedQuestion the encoded version of a quiz question
      * @return the decoded question representing the encoded input
@@ -94,6 +98,48 @@ public final class QuizQuestion {
     }
 
     /**
+     * Normalizes the specified answer for comparison against another answer.
+     *
+     * @param answer the answer to normalize
+     * @return the normalized answer
+     */
+    public static String normalizeAnswer(final String answer) {
+        return answer.toLowerCase().trim();
+    }
+
+    /**
+     * Determines whether a given answer matches a known answer, after normalization.
+     * <p>
+     * Normalization consists of lowercasing both answers, and trimming any excess whitespace.
+     * <p>
+     * An answer matches if it has a substring of the known answer, and the length of that substring is greater than or
+     * equal to half of the length of the total given answer (floored). This ensures that "the skin" matches the
+     * answer "skin" but
+     * also has a pitfall where "not skin" would match the answer "skin".
+     *
+     * @param rawKnownAnswer the known correct answer
+     * @param rawGivenAnswer the given, potentially correct, answer
+     * @return whether the given answer is considered a match after normalization
+     */
+    public static boolean doAnswersMatch(final String rawKnownAnswer, final String rawGivenAnswer) {
+        final String knownAnswer;
+        final String givenAnswer;
+        final int knownAnswerLength;
+        final int givenAnswerLength;
+
+        knownAnswer = QuizQuestion.normalizeAnswer(rawKnownAnswer);
+        givenAnswer = QuizQuestion.normalizeAnswer(rawGivenAnswer);
+        knownAnswerLength = knownAnswer.length();
+        givenAnswerLength = givenAnswer.length();
+
+        if (!givenAnswer.contains(knownAnswer)) {
+            return false;
+        }
+
+        return knownAnswerLength >= (givenAnswerLength / 2);
+    }
+
+    /**
      * Validates whether the given answer matches one of the accepted answers of a questions.
      * <p>
      * An answer matches if it has a substring of an accepted answer, and the length of that substring is greater or
@@ -106,29 +152,7 @@ public final class QuizQuestion {
      * @return whether the given answer matches at least one accepted answer
      */
     public boolean isAcceptedAnswer(final String givenAnswer) {
-        final String normalizedGivenAnswer;
-        normalizedGivenAnswer = givenAnswer.toLowerCase().trim();
-
-        return this.answers.stream().anyMatch((knownAnswer) -> {
-            if (!normalizedGivenAnswer.contains(knownAnswer)) {
-                return false;
-            }
-
-            final int halfGivenAnswerLength;
-            halfGivenAnswerLength = (normalizedGivenAnswer.length() / 2) + 1;
-
-            return knownAnswer.length() >= halfGivenAnswerLength;
-        });
-    }
-
-    /**
-     * Encodes this question in a format that can be decoded by {@link QuizQuestion#decode(String)}.
-     *
-     * @return an encoded string representation of this quiz question
-     */
-    public String encode() {
-        return this.question + QuizQuestion.ENCODED_ANSWER_SEP +
-                String.join(QuizQuestion.ENCODED_ANSWER_SEP, this.answers);
+        return this.answers.stream().anyMatch((knownAnswer) -> QuizQuestion.doAnswersMatch(knownAnswer, givenAnswer));
     }
 
     /**

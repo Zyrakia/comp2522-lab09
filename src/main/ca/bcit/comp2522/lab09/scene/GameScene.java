@@ -271,6 +271,9 @@ public final class GameScene extends VBox implements Destroyable {
         this.updateRunningScore();
     }
 
+    /**
+     * Locks the answer input to "lock in" the current answer.
+     */
     private void lockInAnswer() {
         this.answerInput.setDisable(true);
     }
