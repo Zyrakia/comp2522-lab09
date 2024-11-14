@@ -9,7 +9,7 @@ Which country is the largest in the world?|Russia
 M&M’s Fruit Chews would eventually become what popular candy?|Starbursts
 What is the only food that can never go bad?|Honey
 What was the first animal to ever be cloned?|Sheep
-Who is considered the “Father of Relativity?”|Albert Einstein
+Who is considered the “Father of Relativity?”|Albert Einstein|Einstein
 Nearly all fossils are preserved in what type of rock?|Sedimentary
 Which animal is known as the king of the jungle?|Lion
 What is the hottest planet in our solar system?|Venus
@@ -26,14 +26,14 @@ How many sides does a triangle have?|Three|3
 What is the hardest natural substance on Earth?|Diamond
 What is the smallest prime number?|Two|2
 What do you call an animal that eats only plants?|Herbivore
-Who wrote 'Romeo and Juliet'?|William Shakespeare
+Who wrote 'Romeo and Juliet'?|William Shakespeare|Shakespeare
 What country is famous for the Eiffel Tower?|France
 What is the largest continent?|Asia
 What is the name of the closest star to Earth?|Sun
 How many rings are there in the Olympic logo?|Five|5
 What color are emeralds?|Green
 What is the name of the fairy in 'Peter Pan'?|Tinkerbell
-Which gas do plants absorb from the atmosphere?|Carbon Dioxide
+Which gas do plants absorb from the atmosphere?|Carbon Dioxide|CO2
 What is the name of the longest river in the world?|Nile
 What planet is known as the Red Planet?|Mars
 Which sport is known as the "king of sports"?|Soccer|Football
@@ -79,7 +79,7 @@ How many bones are there in an adult human body?|Two Hundred Six|206
 What galaxy is Earth located in?|Milky Way
 What plant is known for its ability to survive in dry conditions?|Cactus
 What year did World War II end?|1945
-What metal is extracted from bauxite ore?|Aluminum
+What metal is extracted from bauxite ore?|Aluminum|Al
 What does 'BBC' stand for in broadcasting?|British Broadcasting Corporation
 What animal is known for having the most number of legs?|Millipede
 Who directed the movie 'Jaws'?|Steven Spielberg
@@ -93,11 +93,11 @@ Which country gifted the Statue of Liberty to the United States?|France
 What is the national animal of Canada?|Beaver
 What is the boiling point of water in degrees Celsius?|100|Hundred
 What kind of leaf is on the Canadian flag?|Maple
-Who is the author of 'The Catcher in the Rye'?|J.D. Salinger
+Who is the author of 'The Catcher in the Rye'?|J.D. Salinger|jd salinger
 What fruit is known for its high potassium content?|Banana
 What does a paleontologist study?|Fossils
 What does the acronym 'USB' stand for?|Universal Serial Bus
-What are the three primary colors?|Red|Blue|Yellow
+What are the three primary colors?|Red, Blue, Yellow|Red Blue Yellow|Red, Blue and Yellow|R B Y|Red, Blue, and Yellow
 Which country has the largest number of islands?|Sweden
 Who composed the Four Seasons?|Vivaldi
 What substance makes up about 70% of the human body?|Water
@@ -120,7 +120,7 @@ What is 5 x 6?|30|Thirty
 What is the freezing point of water in Celsius?|0|Zero
 What is the largest ocean on Earth?|Pacific Ocean|Pacific
 What is the most famous prehistoric monument in the UK?|Stonehenge
-What temperature in Celsius is considered absolute zero?|Minus 273.15
+What temperature in Celsius is considered absolute zero?|-273.15|minus 273.15
 Which country is known as the Land of the Rising Sun?|Japan
 What is the fastest aquatic animal?|Sailfish
 Which planet is closest to the Sun?|Mercury
@@ -130,7 +130,6 @@ Who was the first female Prime Minister of the United Kingdom?|Margaret Thatcher
 What is the smallest bone in the human body?|Stapes
 Who discovered penicillin?|Alexander Fleming
 What is the capital of Brazil?|Brasília
-Which country has a maple leaf on its flag?|Canada
 What kind of flower is a symbol of the Netherlands?|Tulip
 Which element is known for being a noble gas?|Helium
 What is the tallest breed of dog?|Great Dane
@@ -151,7 +150,7 @@ What is the largest island in the world?|Greenland
 What is the smallest country in Asia by area?|Maldives
 What do you call a baby kangaroo?|Joey
 What is the most popular sport in India?|Cricket
-What gas do humans exhale?|Carbon Dioxide
+What gas do humans exhale?|Carbon Dioxide|CO2
 What is the national currency of the United Kingdom?|Pound Sterling
 What vegetable is known for having a high water content?|Cucumber
 What is the chemical symbol for lead?|Pb
@@ -166,24 +165,24 @@ Which artist painted the ceiling of the Sistine Chapel?|Michelangelo
 What type of creature is a barracuda?|Fish
 What is the largest moon of Saturn called?|Titan
 Which continent has the fewest number of countries?|Antarctica
-Who wrote 'The Hobbit'?|J.R.R. Tolkien
+Who wrote 'The Hobbit'?|J.R.R. Tolkien|JRR Tolkien
 How many players are there on a standard soccer team?|Eleven|11
 Which flower is known as the "Queen of Flowers"?|Rose
 Who invented the light bulb?|Thomas Edison
 What is the largest internal organ in the human body?|Liver
-What is the name of Sherlock Holmes' sidekick?|Dr. Watson
+What is the name of Sherlock Holmes' sidekick?|Dr. Watson|Dr Watson
 What instrument does a pianist play?|Piano
 Which animal is known for its slow movement and spending most of its life hanging upside down in trees?|Sloth
 What was the name of the ship that transported the Pilgrims to America in 1620?|Mayflower
 Which U.S. state was the last to join the union?|Hawaii
-What is the chemical formula for methane?|CH4
+What is the chemical formula for methane?|CH4|Carbon tetrahydride
 Which country is the Great Wall located in?|China
 What is the name of the deepest known point in the world's oceans?|Mariana Trench
 What is the fear of heights called?|Acrophobia
 What country is the origin of the cocktail Mojito?|Cuba
 Which Greek god was the god of the sea?|Poseidon
 What animal is known as the "Ship of the Desert"?|Camel
-What is the currency of Switzerland?|Swiss Franc
+What is the currency of Switzerland?|Swiss Franc|Franc
 What is the Italian word for pie, commonly used for a popular dish?|Pizza
 What is the longest-running Broadway show in history?|The Phantom of the Opera
 What is the main language spoken in Egypt?|Arabic
@@ -206,22 +205,23 @@ What is the name of the world’s largest rainforest?|Amazon
 What type of fish is Nemo from the movie 'Finding Nemo'?|Clownfish
 Who was the first President of the United States?|George Washington
 What country does parmesan cheese originate from?|Italy
-What is the largest type of penguin?|Emperor Penguin
+What is the largest type of penguin?|Emperor Penguin|Emperor
 Which planet is known for having a prominent ring system?|Saturn
 What is the Italian word for "tomorrow"?|Domani
 What is the smallest prime number greater than five?|Seven|7
-What year did the Titanic sink?|1912
+What year did the Titanic sink?|1912|Nineteen Twelve
 What planet is closest in size to Earth?|Venus
 What is the tallest waterfall in the world?|Angel Falls
 Which constellation is known as the Great Bear?|Ursa Major
-Who invented the World Wide Web?|Tim Berners-Lee
+Who invented the World Wide Web?|Tim Berners-Lee|Tim Berners Lee
 What is the cube root of 64?|Four|4
-What is the world's tallest mountain above sea level?|Mount Everest
+What is the world's tallest mountain above sea level?|Mount Everest|Everest
 Which country is the largest producer of coffee in the world?|Brazil
 What animal is also known as a prairie wolf?|Coyote
 What is the process by which plants make food using sunlight called?|Photosynthesis
 What type of celestial object is the Sun?|Star
 What does DNA stand for?|Deoxyribonucleic Acid
+What does RNA stand for?|Ribonucleic Acid
 What’s the main ingredient in hummus?|Chickpeas
 Which chemical element has the atomic number 1?|Hydrogen
 What is the French word for "thank you"?|Merci
