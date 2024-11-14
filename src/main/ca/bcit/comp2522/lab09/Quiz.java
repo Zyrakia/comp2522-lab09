@@ -102,9 +102,8 @@ public final class Quiz {
      *
      * @param question the question to answer
      * @param answer   the answer for the question
-     * @return whether the answer is accepted (whether it was right)
      */
-    public boolean answerQuestion(final QuizQuestion question, final String answer) {
+    public void answerQuestion(final QuizQuestion question, final String answer) {
         if (!this.questions.contains(question)) {
             throw new IllegalArgumentException("The question \"" + question.getQuestionText() +
                                                        "\" is not on this quiz, so it cannot be answered.");
@@ -115,8 +114,6 @@ public final class Quiz {
 
         this.questionAnswers.put(question, answer);
         this.questionAnswerResults.put(question, result);
-
-        return result;
     }
 
     /**

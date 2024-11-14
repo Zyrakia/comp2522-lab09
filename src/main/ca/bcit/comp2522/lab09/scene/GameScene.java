@@ -30,8 +30,8 @@ import java.util.function.Consumer;
 public final class GameScene extends VBox implements Destroyable {
 
     private static final Path QUESTIONS_FILE = Path.of("quiz.txt");
-    private static final int QUESTIONS_PER_GAME = 2;
-    private static final long MILLIS_PER_QUESTION = TimeUnit.SECONDS.toMillis(10);
+    private static final int QUESTIONS_PER_GAME = 10;
+    private static final long MILLIS_PER_QUESTION = TimeUnit.SECONDS.toMillis(1000);
 
     private static final double ELEMENT_SPACING = 25.0;
 
@@ -45,6 +45,7 @@ public final class GameScene extends VBox implements Destroyable {
     private final TextField answerInput;
     private final Button submitButton;
     private final Button finishButton;
+    private final Label runningScoreText;
 
     private QuizQuestion currentQuestion;
 
@@ -58,8 +59,8 @@ public final class GameScene extends VBox implements Destroyable {
         this.onComplete = onComplete;
 
         this.quiz = Quiz.fromQuestionsFile(GameScene.QUESTIONS_FILE, GameScene.QUESTIONS_PER_GAME, true);
-        this.questionTimer = new TimerService(GameScene.MILLIS_PER_QUESTION, this::setMillisRemaining);
 
+        this.questionTimer = new TimerService(GameScene.MILLIS_PER_QUESTION, this::setMillisRemaining);
         this.questionTimer.setOnSucceeded((_) -> this.nextQuestion());
 
         this.questionText = this.createQuestionText();
@@ -67,25 +68,24 @@ public final class GameScene extends VBox implements Destroyable {
         this.answerInput = this.createAnswerInput();
         this.submitButton = this.createSubmitButton();
         this.finishButton = this.createFinishButton();
+        this.runningScoreText = this.createRunningScoreText();
 
         final HBox answerArea;
-        answerArea = new HBox();
+        final HBox statusArea;
 
-        answerArea.getStyleClass().add("answer-area");
-        answerArea.setAlignment(Pos.CENTER);
-        answerArea.getChildren().add(this.answerInput);
-        answerArea.getChildren().add(this.submitButton);
-        HBox.setHgrow(this.answerInput, Priority.ALWAYS);
+        answerArea = this.createAnswerArea();
+        statusArea = this.createStatusArea();
 
         this.setAlignment(Pos.CENTER);
         this.setSpacing(GameScene.ELEMENT_SPACING);
         this.setPadding(new Insets(GameScene.ELEMENT_SPACING));
 
         this.getChildren().add(this.questionText);
-        this.getChildren().add(this.timerText);
+        this.getChildren().add(statusArea);
         this.getChildren().add(answerArea);
         this.getChildren().add(this.finishButton);
 
+        this.updateRunningScore();
         this.nextQuestion();
     }
 
@@ -147,7 +147,10 @@ public final class GameScene extends VBox implements Destroyable {
         button = new Button();
 
         button.setText("Submit");
-        button.setOnAction(_ -> this.submitAnswer());
+        button.setOnAction(_ -> {
+            this.submitAnswer();
+            this.nextQuestion();
+        });
 
         return button;
     }
@@ -165,6 +168,53 @@ public final class GameScene extends VBox implements Destroyable {
         button.setOnAction(_ -> this.finishGame());
 
         return button;
+    }
+
+    /**
+     * Creates the text that is used to display the running score.
+     *
+     * @return the created element
+     */
+    private Label createRunningScoreText() {
+        final Label label;
+        label = new Label();
+
+        label.getStyleClass().add("running-score-text");
+
+        return label;
+    }
+
+    /**
+     * Creates the area that holds the score text and the timer text.
+     *
+     * @return the created area, with the required elements added
+     */
+    private HBox createStatusArea() {
+        final HBox statusArea;
+        statusArea = new HBox();
+
+        statusArea.setAlignment(Pos.CENTER);
+        statusArea.setSpacing(GameScene.ELEMENT_SPACING);
+        statusArea.getChildren().add(this.runningScoreText);
+        statusArea.getChildren().add(this.timerText);
+        return statusArea;
+    }
+
+    /**
+     * Creates the area that holds the answer input and submit button.
+     *
+     * @return the created area, with the required elements added
+     */
+    private HBox createAnswerArea() {
+        final HBox answerArea;
+        answerArea = new HBox();
+
+        answerArea.getStyleClass().add("answer-area");
+        answerArea.setAlignment(Pos.CENTER);
+        answerArea.getChildren().add(this.answerInput);
+        answerArea.getChildren().add(this.submitButton);
+        HBox.setHgrow(this.answerInput, Priority.ALWAYS);
+        return answerArea;
     }
 
     /**
@@ -217,7 +267,7 @@ public final class GameScene extends VBox implements Destroyable {
         this.answerInput.clear();
 
         this.quiz.answerQuestion(this.currentQuestion, answer);
-        // TODO implement and update a score
+        this.updateRunningScore();
     }
 
     /**
@@ -242,6 +292,13 @@ public final class GameScene extends VBox implements Destroyable {
             this.timerText.setTextFill(indicatedColor);
             this.timerText.setText(String.format("Remaining time: %.2fs", seconds));
         });
+    }
+
+    /**
+     * Updates the running score to align with the amount of questions correctly answered in this quiz.
+     */
+    private void updateRunningScore() {
+        this.runningScoreText.setText("Current score: " + this.quiz.getCorrectAnsweredCount());
     }
 
     /**
