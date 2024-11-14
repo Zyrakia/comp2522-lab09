@@ -31,8 +31,8 @@ public final class HomeScene extends VBox {
         this.setSpacing(HomeScene.ELEMENT_SPACING);
         this.setPadding(new Insets(HomeScene.ELEMENT_SPACING));
 
-        this.getChildren().add(this.getGameTitle());
-        this.getChildren().add(this.getStartButton());
+        this.getChildren().add(this.createGameTitle());
+        this.getChildren().add(this.createStartButton());
     }
 
     /**
@@ -40,7 +40,7 @@ public final class HomeScene extends VBox {
      *
      * @return the game title label
      */
-    private Text getGameTitle() {
+    private Text createGameTitle() {
         final Text text;
         text = new Text("Quizzer!");
 
@@ -54,16 +54,12 @@ public final class HomeScene extends VBox {
      *
      * @return the start button
      */
-    private Button getStartButton() {
+    private Button createStartButton() {
         final Button button;
         button = new Button();
 
         button.setText("Start Quiz");
-        button.setOnAction(_ -> {
-            button.setDisable(true);
-            this.startAction.run();
-            button.setDisable(false);
-        });
+        button.setOnAction(_ -> this.startAction.run());
 
         return button;
     }

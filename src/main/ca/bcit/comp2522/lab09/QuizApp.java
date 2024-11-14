@@ -1,10 +1,13 @@
 package ca.bcit.comp2522.lab09;
 
+import ca.bcit.comp2522.lab09.scene.GameScene;
+import ca.bcit.comp2522.lab09.scene.HomeScene;
 import javafx.application.Application;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 /**
  * The driver class for COMP2522 Lab #9.
@@ -13,6 +16,11 @@ import javafx.stage.Stage;
  * @version 1.0
  */
 public final class QuizApp extends Application {
+
+    private static final int SCENE_WIDTH = 600;
+    private static final int SCENE_HEIGHT = 400;
+
+    private static Stage primaryStage;
 
     /**
      * Entry point for the Lab #9 driver class.
@@ -25,19 +33,45 @@ public final class QuizApp extends Application {
 
     @Override
     public void start(final Stage primaryStage) {
-        primaryStage.setTitle("Hello World!");
+        QuizApp.primaryStage = primaryStage;
+        this.setToHomeScreen();
 
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction((_) -> {
-            System.out.println("Hello World");
-        });
-
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-
-        primaryStage.setScene(new Scene(root, 300, 250));
+        primaryStage.setTitle("Quizzer!");
+        primaryStage.setResizable(false);
         primaryStage.show();
+        primaryStage.toFront();
+    }
+
+    private void setToHomeScreen() {
+        this.loadAsScene(new HomeScene(this::startGame));
+    }
+
+    private void startGame() {
+        try {
+            this.loadAsScene(new GameScene());
+            //            this.loadAsScene(new GameScene(this::summarizeGame));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    //    private void summarizeGame(final Quiz playedQuiz) {
+    //        this.loadAsScene(new SummaryScene(playedQuiz, this::setToHomeScreen));
+    //    }
+
+    private void loadAsScene(final Parent root) {
+        final Scene currentScene;
+        final Scene newScene;
+
+        currentScene = QuizApp.primaryStage.getScene();
+        newScene = new Scene(root, QuizApp.SCENE_WIDTH, QuizApp.SCENE_HEIGHT);
+
+        if (currentScene instanceof Destroyable destroyable) {
+            destroyable.destroy();
+        }
+
+        newScene.getStylesheets().add("style.css");
+        QuizApp.primaryStage.setScene(newScene);
     }
 
 }
