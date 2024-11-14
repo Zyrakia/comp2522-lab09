@@ -47,7 +47,7 @@ public final class QuizApp extends Application {
 
         stylesheetPath = QuizApp.GLOBAL_STYLES_PATH.getParent();
         watcherThread = new Thread(() -> {
-            try (final WatchService watchService = FileSystems.getDefault().newWatchService()) {
+            try (WatchService watchService = FileSystems.getDefault().newWatchService()) {
                 stylesheetPath.register(watchService, StandardWatchEventKinds.ENTRY_MODIFY);
 
                 while (true) {

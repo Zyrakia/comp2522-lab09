@@ -59,7 +59,7 @@ public final class TimerService extends Service<Long> {
                     try {
                         Thread.sleep(1);
                         TimerService.this.onTick.accept(millisRemaining);
-                    } catch (final InterruptedException _) {
+                    } catch (InterruptedException _) {
                         if (this.isCancelled()) {
                             break;
                         }

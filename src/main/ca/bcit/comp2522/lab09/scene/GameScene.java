@@ -214,7 +214,7 @@ public final class GameScene extends VBox implements Destroyable {
 
         final String answer;
         answer = this.answerInput.getText();
-        answerInput.clear();
+        this.answerInput.clear();
 
         this.quiz.answerQuestion(this.currentQuestion, answer);
     }
