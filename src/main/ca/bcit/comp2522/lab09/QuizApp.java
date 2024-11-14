@@ -41,6 +41,9 @@ public final class QuizApp extends Application {
         launch(args);
     }
 
+    /**
+     * Starts a file watcher thread on the global styles file for changes to hot-reload during development.
+     */
     private static void startStyleReloading() {
         final Path stylesheetPath;
         final Thread watcherThread;
@@ -67,7 +70,6 @@ public final class QuizApp extends Application {
                             continue;
                         }
 
-                        System.out.println("CSS file changed, reloading...");
                         Platform.runLater(QuizApp::applyStyles);
                     }
 
@@ -82,6 +84,10 @@ public final class QuizApp extends Application {
         watcherThread.start();
     }
 
+    /**
+     * Reapplies the global stylesheet to the currently viewed scene on the primary stage. This will also add an
+     * empty stylesheet to cache-bust the scene styles, which means the new stylesheet will be applied instantly..
+     */
     private static void applyStyles() {
         final Scene currentScene;
         currentScene = QuizApp.primaryStage.getScene();
@@ -106,14 +112,25 @@ public final class QuizApp extends Application {
         primaryStage.toFront();
     }
 
+    /**
+     * Transitions to the game summary screen with the given quiz being summarized.
+     *
+     * @param playedQuiz the quiz to summarize on the summary screen
+     */
     private void summarizeGame(final Quiz playedQuiz) {
         this.loadAsScene(new SummaryScene(playedQuiz, this::setToHomeScreen));
     }
 
+    /**
+     * Transitions to the home screen.
+     */
     private void setToHomeScreen() {
         this.loadAsScene(new HomeScene(this::startGame));
     }
 
+    /**
+     * Transitions to the game screen, which will start a new quiz game immediately.
+     */
     private void startGame() {
         try {
             this.loadAsScene(new GameScene(this::summarizeGame));
@@ -122,6 +139,14 @@ public final class QuizApp extends Application {
         }
     }
 
+    /**
+     * Loads the specified root node as the scene on the primary stage, it will have the global stylesheet applied.
+     * <p>
+     * If the previous scene root is {@link Destroyable}, it will be destroyed. Which means that if the new root is
+     * {@link Destroyable}, it will be destroyed when transitioned away from.
+     *
+     * @param root the root node to load
+     */
     private void loadAsScene(final Parent root) {
         final Scene currentScene;
         final Scene newScene;
@@ -129,7 +154,7 @@ public final class QuizApp extends Application {
         currentScene = QuizApp.primaryStage.getScene();
         newScene = new Scene(root, QuizApp.SCENE_WIDTH, QuizApp.SCENE_HEIGHT);
 
-        if (currentScene instanceof Destroyable destroyable) {
+        if (currentScene.getRoot() instanceof Destroyable destroyable) {
             destroyable.destroy();
         }
 
